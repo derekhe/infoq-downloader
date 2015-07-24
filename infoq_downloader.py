@@ -8,7 +8,7 @@ import argparse
 import requests
 import cssselect
 import lxml.html
-import unicodedata
+from slugify import slugify
 
 if sys.version_info.major == 3:
     text_type = str
@@ -68,7 +68,7 @@ if not os.path.exists(download_directory):
 
 # presentation folder path
 if isinstance(title, text_type):
-    normalized_title = unicodedata.normalize('NFKD', title)
+    normalized_title = slugify(title)
 else:
     normalized_title = text_type(title)
 presentation_directory = os.path.join(download_directory, normalized_title)
